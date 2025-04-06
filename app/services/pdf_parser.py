@@ -1,5 +1,5 @@
 import os
-import fitz  # PyMuPDF
+import fitz  #PyMuPDF
 
 def parse_pdf(file_path):
     doc = fitz.open(file_path)

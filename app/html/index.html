@@ -5,81 +5,382 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="MedLynk - Access Meets Action. Instant access to health records, AI guidance, and seamless appointment scheduling.">
     <title>MedLynk - Access Meets Action</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #f4f7fc;
-            color: #333;
+        :root {
+            --primary-light: #87CEFA;
+            --primary-dark: #4682B4;
+            --accent: #FF7F50;
+            --text-dark: #2C3E50;
+            --text-light: #FFFFFF;
+            --background-light: #F8F9FA;
+        }
+        
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        body {
+            background-color: var(--background-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary-light), var(--primary-dark));
+            color: var(--text-light);
+            padding: 2rem 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, var(--primary-light), var(--primary-dark));
+            color: var(--text-light);
+            text-align: center;
+            padding: 4rem 0;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+        
+        .qr-section {
+            padding: 5rem 0;
+            text-align: center;
+            background-color: white;
+        }
+        
+        .qr-container {
+            width: 280px;
+            height: 280px;
+            border: 3px solid var(--primary-dark);
+            border-radius: 10px;
+            margin: 0 auto;
             display: flex;
-            justify-content: center;
             align-items: center;
-            height: 100vh;
+            justify-content: center;
+            background-color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .qr-code {
+            width: 220px;
+            height: 220px;
+            background-color: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .scan-text {
+            margin-top: 1.5rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--primary-dark);
+        }
+        
+        .features {
+            padding: 5rem 0;
+            background-color: var(--background-light);
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            color: var(--primary-dark);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+            height: 100%;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            background: linear-gradient(135deg, var(--primary-light), var(--primary-dark));
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-icon i {
+            color: white;
+            font-size: 1.5rem;
+        }
+        
+        .feature-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-dark);
+        }
+        
+        .team {
+            padding: 5rem 0;
+            background-color: white;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .team-member {
+            background: var(--background-light);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+            padding: 1.5rem;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+        
+        .member-info {
             text-align: center;
         }
-
-        .container {
-            background: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            padding: 30px;
-            max-width: 800px;
-            width: 100%;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            color: #2c3e50;
-        }
-
-        p {
+        
+        .member-name {
             font-size: 1.2rem;
-            line-height: 1.6;
-            margin-bottom: 20px;
-            color: #7f8c8d;
+            margin-bottom: 0.5rem;
+            color: var(--primary-dark);
         }
-
-        .cta-button {
-            background-color: #3498db;
-            color: white;
-            padding: 15px 30px;
+        
+        .member-links a {
+            color: var(--primary-dark);
             text-decoration: none;
-            font-size: 1.1rem;
+            display: block;
+            margin-top: 0.5rem;
+            transition: color 0.3s ease;
+        }
+        
+        .member-links a:hover {
+            color: var(--accent);
+        }
+        
+        footer {
+            background: linear-gradient(135deg, var(--primary-light), var(--primary-dark));
+            color: var(--text-light);
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 0.8rem 1.5rem;
             border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
             transition: background-color 0.3s ease;
         }
-
-        .cta-button:hover {
-            background-color: #2980b9;
+        
+        .btn:hover {
+            background-color: #FF6347;
         }
-
-        footer {
-            margin-top: 40px;
-            font-size: 0.9rem;
-            color: #bdc3c7;
+        
+        /* Medium screens */
+        @media (min-width: 768px) and (max-width: 1200px) {
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
-
-        footer a {
-            color: #3498db;
-            text-decoration: none;
+        
+        /* Mobile screens */
+        @media (max-width: 767px) {
+            .features-grid,
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .logo {
+                font-size: 2rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero {
+                padding: 3rem 0;
+            }
+            
+            .qr-section,
+            .features,
+            .team {
+                padding: 3rem 0;
+            }
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-
-    <div class="container">
-        <h1>MedLynk</h1>
-        <p><strong>Access Meets Action.</strong><br>MedLynk gives patients instant access to their health records, real-time AI guidance, and the ability to schedule real appointments seamlessly.</p>
-        
-        <a href="#learn-more" class="cta-button">Learn More</a>
-        
-        <footer>
-            <p>© 2025 MedLynk. All rights reserved. <a href="#">Privacy Policy</a></p>
-        </footer>
-    </div>
-
+    <header>
+        <div class="container">
+            <div class="logo">MedLynk</div>
+            <div class="tagline">Access Meets Action</div>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="container">
+            <h1>Your Health, Connected</h1>
+            <p>MedLynk gives patients instant access to their health records, real-time AI guidance, and the ability to schedule real appointments seamlessly.</p>
+            <a href="#download" class="btn">Use Now</a>
+        </div>
+    </section>
+    
+    <section class="qr-section" id="download">
+        <div class="container">
+            <h2 class="section-title">Get Started Now</h2>
+            <div class="qr-container">
+                <div class="qr-code">
+                    <img src="/api/placeholder/220/220" alt="QR Code to use MedLynk app">
+                </div>
+            </div>
+            <p class="scan-text">Scan the QR code to use MedLynk</p>
+        </div>
+    </section>
+    
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">App Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-file-medical"></i>
+                    </div>
+                    <h3 class="feature-title">Medical Records Access</h3>
+                    <p>Instantly access your complete medical history, lab results, and prescriptions all in one secure place.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3 class="feature-title">AI Health Assistant</h3>
+                    <p>Chat with our Gemini-powered AI to understand your health data, get insights, and receive guidance.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <h3 class="feature-title">Appointment Scheduling</h3>
+                    <p>Seamlessly schedule real appointments with your doctor through Calendly integration.</p>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+    
+    <section class="team">
+        <div class="container">
+            <h2 class="section-title">Team Spotlight</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-info">
+                        <h3 class="member-name">Jason Boenjamin</h3>
+                        <div class="member-links">
+                            <a href="https://github.com/jason-boenjamin" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-info">
+                        <h3 class="member-name">Anna Lee</h3>
+                        <div class="member-links">
+                            <a href="https://github.com/annlee1226" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-info">
+                        <h3 class="member-name">Sneha Gurung</h3>
+                        <div class="member-links">
+                            <a href="https://github.com/sneha-grg" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-info">
+                        <h3 class="member-name">Falak Tulsi</h3>
+                        <div class="member-links">
+                            <a href="https://github.com/Tech13-08" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 MedLynk. All rights reserved.</p>
+        </div>
+    </footer>
 </body>
 </html>

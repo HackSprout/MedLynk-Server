@@ -54,16 +54,15 @@ if __name__ == "__main__":
                 print("MedLynk AI: I didn't understand that time. Please type exactly like '3:00 PM'.\n")
                 continue
 
-            # Now, create a scheduling link
             link = create_scheduling_link()
 
             if link:
-                print(f"MedLynk AI: ✅ You can book your appointment here: {link}\n")
+                print(f"MedLynk AI: You can book your appointment here: {link}\n")
             else:
-                print(f"MedLynk AI: ❌ Booking failed. Try again later.\n")
+                print(f"MedLynk AI: Booking failed. Try again later.\n")
 
             in_booking_mode = False
-            continue  # skip Gemini chat
+            continue  
 
         # regular Gemini conversation
         chat_history.append({"role": "user", "parts": [user_input]})

@@ -13,7 +13,6 @@ CALENDLY_EVENT_TYPE_URI = os.getenv("CALENDLY_EVENT_TYPE_URI")
 print(f"[DEBUG] Loaded Calendly API Key: {CALENDLY_API_KEY}")
 
 def create_scheduling_link():
-    """Create a Calendly scheduling link users can click."""
     url = "https://api.calendly.com/scheduling_links"
     headers = {
         "Authorization": f"Bearer {CALENDLY_API_KEY}",
@@ -21,7 +20,7 @@ def create_scheduling_link():
     }
 
     payload = {
-        "owner": CALENDLY_EVENT_TYPE_URI,  # this is the event type, NOT the user
+        "owner": CALENDLY_EVENT_TYPE_URI,  
         "max_event_count": 1,
         "owner_type": "EventType"
     }
@@ -32,5 +31,5 @@ def create_scheduling_link():
         scheduling_link = response.json()["resource"]["booking_url"]
         return scheduling_link
     else:
-        print(f"❌ Failed to create scheduling link. Status: {response.status_code}, Response: {response.text}")
+        print(f"Failed to create scheduling link. Status: {response.status_code}, Response: {response.text}")
         return None

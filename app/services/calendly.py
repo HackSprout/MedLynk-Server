@@ -7,38 +7,30 @@ from dotenv import load_dotenv
 load_dotenv()
 
 CALENDLY_API_KEY = os.getenv("CALENDLY_API_KEY")
+CALENDLY_USER_URI = os.getenv("CALENDLY_USER_URI")
+CALENDLY_EVENT_TYPE_URI = os.getenv("CALENDLY_EVENT_TYPE_URI")
+
 print(f"[DEBUG] Loaded Calendly API Key: {CALENDLY_API_KEY}")
-# This is YOUR event link (where bookings will happen)
-EVENT_TYPE_URI = "https://api.calendly.com/event_types/39b1b552-bd46-4d9e-ba75-5ce78f295896"
 
-# Doctor info (static for now)
-DOCTOR_NAME = "Doctor Huang"
-DOCTOR_EMAIL = "jasonboe510@gmail.com"
-
-def book_real_appointment(invitee_email, invitee_name, start_time_iso):
-    """Book an appointment via Calendly API."""
-    url = "https://api.calendly.com/scheduled_events"
-
+def create_scheduling_link():
+    """Create a Calendly scheduling link users can click."""
+    url = "https://api.calendly.com/scheduling_links"
     headers = {
         "Authorization": f"Bearer {CALENDLY_API_KEY}",
         "Content-Type": "application/json"
     }
 
     payload = {
-        "event_type": EVENT_TYPE_URI,
-        "invitees": [
-            {
-                "email": invitee_email,
-                "name": invitee_name
-            }
-        ],
-        "start_time": start_time_iso,
+        "owner": CALENDLY_EVENT_TYPE_URI,  # this is the event type, NOT the user
+        "max_event_count": 1,
+        "owner_type": "EventType"
     }
 
     response = requests.post(url, headers=headers, json=payload)
 
     if response.status_code == 201:
-        return True
+        scheduling_link = response.json()["resource"]["booking_url"]
+        return scheduling_link
     else:
-        print(f"❌ Booking Failed. Status: {response.status_code}, Response: {response.text}")
-        return False
+        print(f"❌ Failed to create scheduling link. Status: {response.status_code}, Response: {response.text}")
+        return None

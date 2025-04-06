@@ -21,5 +21,4 @@ def chat(chat_id):
     history = get_chat_history(chat_id)
     response = ask_gemini(history)
     append_to_history(chat_id, "model", response)
-    history = get_chat_history(chat_id)
-    return jsonify({"response": history})
+    return jsonify({"response": response})
